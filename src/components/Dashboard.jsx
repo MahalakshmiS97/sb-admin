@@ -2,6 +2,8 @@ import React from 'react'
 import Tile from './Tile'
 import Table from 'react-bootstrap/Table';
 import Button from 'react-bootstrap/Button';
+import { useNavigate } from 'react-router-dom';
+
 function Dashboard({data,setData}) {
     let dashboardData = [{
         color:'primary',
@@ -28,7 +30,9 @@ function Dashboard({data,setData}) {
         title:'Pending Requests',
         value:'18'
     }]
-    
+
+    let navigate=useNavigate()
+
     let handleDelete = (index) =>{
         let newArrary=[...data] //deep copy
         newArrary.splice(index,1)
@@ -80,7 +84,9 @@ function Dashboard({data,setData}) {
                 <td>{e.mobile}</td>
                 <td>{e.batch}</td>
                 <td>
-                    <Button variant='primary'>Edit</Button>
+                    <Button variant='primary' onClick={()=>{
+                        navigate(`/edit/${i}`)
+                    }}>Edit</Button>
                     &nbsp;
                     &nbsp;
                     <Button variant='danger' onClick={()=>handleDelete(i)}>Delete</Button>
